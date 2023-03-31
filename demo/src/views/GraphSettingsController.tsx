@@ -43,12 +43,13 @@ const GraphSettingsController: FC<{ hoveredNode: string | null }> = ({ children,
               : { ...data, zIndex: 0, label: "", color: NODE_FADE_COLOR, image: null, highlighted: false }
         : null,
     );
+    /* TODO ajuster la taille des fleches sur survol color: hoveredColor, size: 2*/
     sigma.setSetting(
       "edgeReducer",
       debouncedHoveredNode
         ? (edge, data) =>
             graph.hasExtremity(edge, debouncedHoveredNode)
-              ? { ...data, color: hoveredColor, size: 4 }
+              ? { ...data, color: hoveredColor, size: 1 }
               : { ...data, color: EDGE_FADE_COLOR, hidden: true }
         : null,
     );

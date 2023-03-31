@@ -18,6 +18,7 @@ const GraphEventsController: FC<{ setHoveredNode: (node: string | null) => void 
     registerEvents({
       clickNode({ node }) {
         if (!graph.getNodeAttribute(node, "hidden")) {
+          /* TODO ajouter un affichage de contenu au lien d'un lien */
           window.open(graph.getNodeAttribute(node, "URL"), "_blank");
         }
       },

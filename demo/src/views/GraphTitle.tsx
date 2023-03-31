@@ -26,17 +26,17 @@ const GraphTitle: FC<{ filters: FiltersState }> = ({ filters }) => {
 
   return (
     <div className="graph-title">
-      <h1>A cartography of Wikipedia pages around data visualization</h1>
+      <h1>Cartographie des données (topic, applications, consmmateurs)</h1>
       <h2>
         <i>
-          {graph.order} node{graph.order > 1 ? "s" : ""}{" "}
+          {graph.order} noeud{graph.order > 1 ? "s" : ""}{" "}
           {visibleItems.nodes !== graph.order
-            ? ` (only ${prettyPercentage(visibleItems.nodes / graph.order)} visible)`
+            ? ` (seulement ${prettyPercentage(visibleItems.nodes / graph.order)} visibles)`
             : ""}
-          , {graph.size} edge
+          , {graph.size} relation
           {graph.size > 1 ? "s" : ""}{" "}
           {visibleItems.edges !== graph.size
-            ? ` (only ${prettyPercentage(visibleItems.edges / graph.size)} visible)`
+            ? ` (seulement ${prettyPercentage(visibleItems.edges / graph.size)} visibles)`
             : ""}
         </i>
       </h2>

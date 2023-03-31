@@ -68,6 +68,7 @@ function setSearchQuery(query: string) {
     }
     // Else, we display the suggestions list:
     else {
+      /* TODO ajouter suggestion textelibre */
       state.selectedNode = undefined;
       state.suggestions = new Set(suggestions.map(({ id }) => id));
     }

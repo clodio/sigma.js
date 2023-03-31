@@ -15,16 +15,20 @@ const SearchField: FC<{ filters: FiltersState }> = ({ filters }) => {
   const sigma = useSigma();
 
   const [search, setSearch] = useState<string>("");
-  const [values, setValues] = useState<Array<{ id: string; label: string }>>([]);
+  const [values, setValues] = useState<Array<{ id: string; label: string; textelibre: string }>>([]);
   const [selected, setSelected] = useState<string | null>(null);
 
   const refreshValues = () => {
-    const newValues: Array<{ id: string; label: string }> = [];
+    const newValues: Array<{ id: string; label: string; textelibre: string }> = [];
     const lcSearch = search.toLowerCase();
     if (!selected && search.length > 1) {
       sigma.getGraph().forEachNode((key: string, attributes: Attributes): void => {
-        if (!attributes.hidden && attributes.label && attributes.label.toLowerCase().indexOf(lcSearch) === 0)
-          newValues.push({ id: key, label: attributes.label });
+        if (!attributes.hidden && attributes.label && ( attributes.label.toLowerCase().indexOf(lcSearch) === 0 || (typeof attributes.textelibre !== 'undefined' && attributes.textelibre.toLowerCase().indexOf(lcSearch) === 0)))
+/* TODO Ajouter recherche ignorant _-... */
+          if ( typeof attributes.textelibre !== 'undefined')
+            newValues.push({ id: key, label: attributes.label, textelibre: attributes.textelibre});
+          else 
+            newValues.push({ id: key, label: attributes.label, textelibre: '' });
       });
     }
     setValues(newValues);
@@ -59,7 +63,10 @@ const SearchField: FC<{ filters: FiltersState }> = ({ filters }) => {
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchString = e.target.value;
-    const valueItem = values.find((value) => value.label === searchString);
+    const valueItem = values.find(function (value) {
+      // console.log(value)
+      return ( value.label === searchString || value.textelibre === searchString);
+    })
     if (valueItem) {
       setSearch(valueItem.label);
       setValues([]);
@@ -77,19 +84,23 @@ const SearchField: FC<{ filters: FiltersState }> = ({ filters }) => {
     }
   };
 
+  const divStyle = {
+    /* TODO amelioerer rechrche dans sous champcolor: 'red' */
+  };
+
   return (
-    <div className="search-wrapper">
+    <div className="search-wrapper"  style={divStyle}>
       <input
         type="search"
-        placeholder="Search in nodes..."
+        placeholder="Tapez ici pour rechercher..."
         list="nodes"
         value={search}
         onChange={onInputChange}
         onKeyPress={onKeyPress}
       />
       <BsSearch className="icon" />
-      <datalist id="nodes">
-        {values.map((value: { id: string; label: string }) => (
+      <datalist id="nodes" style={divStyle}>
+        {values.map((value: { id: string; label: string; textelibre: string }) => (
           <option key={value.id} value={value.label}>
             {value.label}
           </option>

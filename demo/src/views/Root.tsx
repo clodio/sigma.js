@@ -10,6 +10,7 @@ import GraphDataController from "./GraphDataController";
 import DescriptionPanel from "./DescriptionPanel";
 import { Dataset, FiltersState } from "../types";
 import ClustersPanel from "./ClustersPanel";
+// import UsersPanel from "./UsersPanel";
 import SearchField from "./SearchField";
 import drawLabel from "../canvas-utils";
 import GraphTitle from "./GraphTitle";
@@ -27,18 +28,20 @@ const Root: FC = () => {
   const [filtersState, setFiltersState] = useState<FiltersState>({
     clusters: {},
     tags: {},
+    users: {},
   });
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
   // Load data on mount:
   useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/dataset.json`)
+    fetch(`${process.env.PUBLIC_URL}/network_kafka_sigma_with_x_y_referent.json`)
       .then((res) => res.json())
       .then((dataset: Dataset) => {
         setDataset(dataset);
         setFiltersState({
           clusters: mapValues(keyBy(dataset.clusters, "key"), constant(true)),
           tags: mapValues(keyBy(dataset.tags, "key"), constant(true)),
+          users: mapValues(keyBy(dataset.users, "key"), constant(true)),
         });
         requestAnimationFrame(() => setDataReady(true));
       });
@@ -125,6 +128,24 @@ const Root: FC = () => {
                     }));
                   }}
                 />
+                {/* <UsersPanel
+                  users={dataset.users}
+                  filters={filtersState}
+                  setUsers={(users: any) =>
+                    setFiltersState((filters) => ({
+                      ...filters,
+                      users,
+                    }))
+                  }
+                  toggleUser={(user: any) => {
+                    setFiltersState((filters) => ({
+                      ...filters,
+                      users: filters.users[user]
+                        ? omit(filters.users, user)
+                        : { ...filters.users, [user]: true },
+                    }));
+                  }}
+                /> */}
                 <TagsPanel
                   tags={dataset.tags}
                   filters={filtersState}

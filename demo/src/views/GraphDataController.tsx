@@ -15,6 +15,7 @@ const GraphDataController: FC<{ dataset: Dataset; filters: FiltersState }> = ({ 
     if (!graph || !dataset) return;
 
     const clusters = keyBy(dataset.clusters, "key");
+    // const users = keyBy(dataset.users, "key");
     const tags = keyBy(dataset.tags, "key");
 
     dataset.nodes.forEach((node) =>

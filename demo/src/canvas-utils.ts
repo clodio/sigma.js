@@ -32,14 +32,17 @@ export function drawRoundRect(
  * Custom hover renderer
  */
 export function drawHover(context: CanvasRenderingContext2D, data: PlainObject, settings: PlainObject) {
+ 
+ /* TODO Affichage des textes sur survol */
   const size = settings.labelSize;
   const font = settings.labelFont;
   const weight = settings.labelWeight;
   const subLabelSize = size - 2;
 
-  const label = data.label;
+  /* TODO amelioer affichae au survol) */
+  const label = data.label 
   const subLabel = data.tag !== "unknown" ? data.tag : "";
-  const clusterLabel = data.clusterLabel;
+  const clusterLabel = data.clusterLabel + ' - ' + data['app_info']['Contact Référent']+ ' - ' + data['app_info']['Socle'];
 
   // Then we draw the label background
   context.beginPath();

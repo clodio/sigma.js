@@ -46,7 +46,7 @@ const ClustersPanel: FC<{
     <Panel
       title={
         <>
-          <MdGroupWork className="text-muted" /> Clusters
+          <MdGroupWork className="text-muted" /> Applications
           {visibleClustersCount < clusters.length ? (
             <span className="text-muted text-small">
               {" "}
@@ -59,14 +59,14 @@ const ClustersPanel: FC<{
       }
     >
       <p>
-        <i className="text-muted">Click a cluster to show/hide related pages from the network.</i>
+        <i className="text-muted">Cliquez sur un cluster pour afficher/masquer</i>
       </p>
       <p className="buttons">
         <button className="btn" onClick={() => setClusters(mapValues(keyBy(clusters, "key"), () => true))}>
-          <AiOutlineCheckCircle /> Check all
+          <AiOutlineCheckCircle /> Tout sélectionner
         </button>{" "}
         <button className="btn" onClick={() => setClusters({})}>
-          <AiOutlineCloseCircle /> Uncheck all
+          <AiOutlineCloseCircle /> Tout désélectionner
         </button>
       </p>
       <ul>
@@ -78,7 +78,7 @@ const ClustersPanel: FC<{
               className="caption-row"
               key={cluster.key}
               title={`${nodesCount} page${nodesCount > 1 ? "s" : ""}${
-                visibleNodesCount !== nodesCount ? ` (only ${visibleNodesCount} visible)` : ""
+                visibleNodesCount !== nodesCount ? ` (seulement ${visibleNodesCount} visibles)` : ""
               }`}
             >
               <input
@@ -90,7 +90,7 @@ const ClustersPanel: FC<{
               <label htmlFor={`cluster-${cluster.key}`}>
                 <span className="circle" style={{ background: cluster.color, borderColor: cluster.color }} />{" "}
                 <div className="node-label">
-                  <span>{cluster.clusterLabel}</span>
+                  <span><a target="_blank"  rel="noreferrer" href='https://wiki.net.extra.laposte.fr/confluence/dosearchsite.action?where=DATAGOUV&additional=none&labels=&contentType=&queryString={cluster.clusterLabel}'>{cluster.app_info.ccx} - {cluster.clusterLabel}</a></span>
                   <div className="bar" style={{ width: (100 * nodesCount) / maxNodesPerCluster + "%" }}>
                     <div
                       className="inside-bar"

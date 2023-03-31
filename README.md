@@ -82,3 +82,10 @@ npm run website:all
 You can contribute by submitting [issues tickets](http://github.com/jacomyal/sigma.js/issues) and proposing [pull requests](http://github.com/jacomyal/sigma.js/pulls). Make sure that tests and linting pass before submitting any pull request.
 
 You can also browse the related documentation [here](./CONTRIBUTING.md).
+
+## lancer la demo
+
+```cd
+cd demo/
+npm start
+```

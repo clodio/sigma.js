@@ -59,14 +59,14 @@ const TagsPanel: FC<{
       }
     >
       <p>
-        <i className="text-muted">Click a category to show/hide related pages from the network.</i>
+        <i className="text-muted">Cliquez sur une catégorie pour afficher/masquer</i>
       </p>
       <p className="buttons">
         <button className="btn" onClick={() => setTags(mapValues(keyBy(tags, "key"), () => true))}>
-          <AiOutlineCheckCircle /> Check all
+          <AiOutlineCheckCircle /> Tout sélectionner
         </button>{" "}
         <button className="btn" onClick={() => setTags({})}>
-          <AiOutlineCloseCircle /> Uncheck all
+          <AiOutlineCloseCircle /> Tout désélectionner
         </button>
       </p>
       <ul>
@@ -78,7 +78,7 @@ const TagsPanel: FC<{
               className="caption-row"
               key={tag.key}
               title={`${nodesCount} page${nodesCount > 1 ? "s" : ""}${
-                visibleNodesCount !== nodesCount ? ` (only ${visibleNodesCount} visible)` : ""
+                visibleNodesCount !== nodesCount ? ` (seulement ${visibleNodesCount} visibles)` : ""
               }`}
             >
               <input
